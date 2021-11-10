@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import clasesPrincipales.Teclado;
 
 public class VentaEntrada {
     static void Entrada() {
@@ -17,7 +18,8 @@ public class VentaEntrada {
         int tipo;
         boolean bucle=false;
         int otro=0;
-        
+
+        Teclado entrada = new Teclado();
         Scanner ent = new Scanner(System.in);
         
         System.out.println("¿Tipo de entrada?"); //Aun que vengan en grupo el tipo de la entrada es el mismo
