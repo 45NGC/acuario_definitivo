@@ -13,13 +13,14 @@ public class Pez {
     }
 
     public void mostrarPecera() {
-        System.out.println(codigoDePiscina);
+        System.out.println("# Pecera del pez con codigo " + this.ID);
+        System.out.println(" - " + codigoDePiscina);
     }
 
     public void mostrarDatos() {
         System.out.println("# Datos del pez con codigo " + this.ID);
         System.out.println(" - Especie: " + this.especie);
-        if (this.tipoDeAgua)
+        if (this.tipoDeAgua) // El booleano controla el tipo de agua
             System.out.println(" - Tipo de agua: dulce");
         else
             System.out.println(" - Tipo de agua: salada");

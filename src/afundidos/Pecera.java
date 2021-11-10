@@ -2,31 +2,31 @@ package afundidos;
 
 public class Pecera {
     private int id;
-    private boolean tipo_agua;
+    private boolean tipoDeAgua;
     private String descripcion;
     private float temperatura;
     private float tamaño;
     private Pez peces[];
 
-    public Pecera(int id, boolean tipo_agua, String descripcion, float temperatura, float tamano, Pez[] peces){
+    public Pecera(int id, boolean tipoDeAgua, String descripcion, float temperatura, float tamano, Pez[] peces){
         this.id=id;
-        this.tipo_agua=tipo_agua;
+        this.tipoDeAgua=tipoDeAgua;
         this.descripcion=descripcion;
         this.temperatura=temperatura;
         this.tamaño=tamano;
         this.peces=peces;
     }
 
-    public void listar_peces(){
+    public void listarPeces(){
         System.out.println("## Datos de todos los peces de la piscina " + this.id);
         for(Pez pez : peces){
             pez.mostrarDatos();
         }
     }
 
-    public void mostrar_caracteristicas(){
+    public void mostrarCaracteristicas(){
         System.out.println("## Datos de la piscina " + this.id);
-        if (this.tipo_agua)
+        if (this.tipoDeAgua)
             System.out.println(" - Tipo de agua: dulce");
         else
             System.out.println(" - Tipo de agua: salada");
