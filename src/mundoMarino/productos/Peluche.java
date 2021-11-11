@@ -1,6 +1,6 @@
 package mundoMarino.productos;
 
-import com.jmirallesr.Producto;
+import mundoMarino.Producto;
 
 public class Peluche extends Producto {
 

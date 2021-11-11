@@ -5,7 +5,7 @@ package mundoMarino;
 public class GestionTienda {
 
     /* Attributes */
-    private Producto productos[] = null;
+    private Producto[] productos = null;
     private double caja;
 
     /* Constructor */
