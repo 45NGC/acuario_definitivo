@@ -19,7 +19,7 @@ public class Cliente {
 
 
     Cliente(){}
-    Cliente(int numVisitante,String nombre, String apellidos, String dni, String correoElectronico, String nombreResponsable, int edad, String horaEntrada, String horaSalida, int valoracion){
+    public Cliente(int numVisitante, String nombre, String apellidos, String dni, String correoElectronico, String nombreResponsable, int edad, String horaEntrada, String horaSalida, int valoracion){
         this.numVisitante=numVisitante;
         this.nombre=nombre;
         this.apellidos=apellidos;
@@ -100,12 +100,12 @@ public class Cliente {
 
 
 
-    int tamano(){
+    public int tamano(){
 
         return(4+2+30+2+50+2+9+2+40+2+30+4+2+5+2+5+4);
     }
 
-    boolean leerDeArchivo(RandomAccessFile f){
+    public boolean leerDeArchivo(RandomAccessFile f){
         boolean finArchivo = false;
         try{
             numVisitante=f.readInt();
@@ -128,16 +128,16 @@ public class Cliente {
         }
         return (finArchivo);
     }
-    void mostrarDatosEntrada(){
+    public void mostrarDatosEntrada(){
         System.out.println("El visitante numero "+numVisitante+" llamado "+nombre.trim()+" "+apellidos.trim()+" entró al acuario a las "+horaEntrada.trim()+" horas.");
     }
-    void mostrarDatosSalida(){
+    public void mostrarDatosSalida(){
         System.out.println("El visitante numero "+numVisitante+" llamado "+nombre.trim()+" "+apellidos.trim()+" salió del acuario a las "+horaSalida.trim()+" horas.");
     }
-    void mostrarDatos(){
+    public void mostrarDatos(){
         System.out.println("Número de visitante: "+numVisitante+", Nombre: "+nombre.trim()+", Apellidos: "+apellidos.trim()+", DNI: "+dni.trim()+", Correo electrónico: "+correoElectronico.trim()+", Nombre de la persona responsable: "+nombreResponsable.trim()+", Edad:"+edad+", Hora de entrada al recinto: "+horaEntrada.trim()+", Hora de salida del recinto: "+horaSalida.trim()+", Valoracion: "+valoracion);
     }
-    void mostrarDatosValoracion(){
+    public void mostrarDatosValoracion(){
         System.out.println("El visitante numero "+numVisitante+" llamado "+nombre.trim()+" "+apellidos.trim()+" le dio una valoracion al acuario de " + valoracion + " sobre 5.");
     }
 }
