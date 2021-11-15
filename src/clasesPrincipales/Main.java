@@ -3,6 +3,11 @@ package clasesPrincipales;
 import java.io.IOException;
 
 public class Main {
+
+    //Rutas de acceso a los ficheros
+    static final String rutaCliente ="acuario_definitivo\\data\\clientes.dat";
+    static final String rutaEmpleados = "acuario_definitivo\\data\\Empleados.txt";
+
     public static void main(String[]args) throws IOException{
         Teclado t = new Teclado();
         int opcionMenuPrincipal;
