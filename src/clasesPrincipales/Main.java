@@ -6,6 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.RandomAccess;
 
 import afundidos.Evento;
 import afundidos.Pecera;
@@ -20,7 +21,7 @@ public class Main {
 
     //Rutas de acceso a los ficheros
     static final String rutaCliente ="acuario_definitivo\\data\\clientes.dat";
-    static final String rutaEmpleados = "acuario_definitivo\\data\\Empleados.txt";
+    static final String rutaEmpleados = "data\\Empleados.dat";
 
     public static void main(String[]args) throws IOException{
         Teclado t = new Teclado();
@@ -262,9 +263,9 @@ public class Main {
     }
 
     static void menuPrincipalempleados() throws IOException{
-        File fichero = new File(rutaEmpleados);
+        RandomAccessFile ficheroRandom = new RandomAccessFile(rutaEmpleados, "rw");
         FileReader lector = new FileReader (rutaEmpleados);
-        FileWriter escritor = new FileWriter(rutaEmpleados);
+        FileWriter escritor = new FileWriter(rutaEmpleados, true);
         BufferedReader br = new BufferedReader(lector);
         BufferedWriter bw = new BufferedWriter(escritor);
         Teclado entrada=new Teclado();
@@ -278,28 +279,29 @@ public class Main {
             System.out.println();
             System.out.println("1- Listar empleados");
             System.out.println("2- Añadir un empleado");
-            System.out.println("2- Cambiar un empleado");
+            System.out.println("3- Cambiar un empleado");
             System.out.println();
             do{
                 System.out.println("Seleccione una opcion (0 para terminar) : ");
                 opcionMenuEmpleados=entrada.leerInt();
-            }while(opcionMenuEmpleados<0 || opcionMenuEmpleados>2);
+            }while(opcionMenuEmpleados<0 || opcionMenuEmpleados>3);
 
             switch (opcionMenuEmpleados){
                 case 0 -> fin=true;
-                case 1 -> listaEmpledos(br);
-                case 2 -> anadirEmpleado(br, bw, fichero);
-                case 3 ->cambiarEmpleado();
+                case 1 -> listaEmpledos(br, ficheroRandom);
+                case 2 -> anadirEmpleado(br, bw, ficheroRandom);
+                case 3 -> cambiarEmpleado();
             }
         }while(!fin);
     }
 
-    static void listaEmpledos(BufferedReader br) throws IOException{
+    static void listaEmpledos(BufferedReader br, RandomAccessFile ficheroRandom) throws IOException{
         int i;
-        String linea=" ";
+        String linea;
         // Este for recorre el fichero 'empleados' y en caso de que no sean nulos los imprime
         // Cuando se encuentra una linea null se termina el for
-        for(i=1;linea!=null;i++){
+        for(i=1;i<ficheroRandom.length();i++){
+            ficheroRandom.seek(i);
             linea=br.readLine();
 
             if(linea!=null){
@@ -310,10 +312,10 @@ public class Main {
         }
     }
 
-    static void anadirEmpleado(BufferedReader br,BufferedWriter bw, File fichero) throws IOException{
+    static void anadirEmpleado(BufferedReader br,BufferedWriter bw, RandomAccessFile ficheroRandom) throws IOException{
         Teclado t = new Teclado();
         int i, otro, confirmacion;
-        String linea,datosEmpleado;
+        String datosEmpleado;
         boolean fin=false;
 
         // Le pedimos los datos del empleado al usuario, que son los siguientes:
@@ -339,7 +341,7 @@ public class Main {
                 do{
                     System.out.println("Introduza el nombre y los apellidos del empleado :");
                     nombreApellidos=t.leerString();
-                }while(nombreApellidos.length()<40);
+                }while(nombreApellidos.length()>40);
 
                 do{
                     System.out.println("Introduza el DNI del empleado :");
@@ -349,7 +351,7 @@ public class Main {
                 do{
                     System.out.println("Introduza el tipo de trabajo desempeñado por el empleado :");
                     tipoTrabajo=t.leerString();
-                }while(tipoTrabajo.length()<40);
+                }while(tipoTrabajo.length()>40);
 
                 do{
                     System.out.println("Introduza las horas de trabajo del empleado :");
@@ -364,7 +366,7 @@ public class Main {
                 do{
                     System.out.println("Introduza el sueldo del empleado :");
                     sueldo=t.leerInt();
-                }while(sueldo>8);
+                }while(sueldo<900);
 
                 do{
                     System.out.println("Introduza la valoracion del empleado :");
@@ -384,16 +386,18 @@ public class Main {
                 if(confirmacion==0){
                     System.out.println("La introduccion del empleado fue cancelada");
                 }else{
-
                     // Este for recorre el fichero 'empleados' y en caso de que encuentre una linea nula (vacia)
                     // termina el for y el escritor se posiciona en la linea determinada
-                    for(i=1;i < fichero.length();i++){
+                    String linea=" ";
+                    for(i=1;linea!=null;i++){
+                        ficheroRandom.seek(i);
                         linea=br.readLine();
-                        if(linea == null){
-                            bw.write(id+"   "+nombreApellidos+"   "+dni+"   "+tipoTrabajo+"   "+horasTrabajo+"   "+sueldo+"   "+vacaciones+"   "+valoracion);
-                        }
                     }
 
+                    // Escribimos los datos del empleado en el archivo
+                    bw.write(datosEmpleado);
+                    // Guardamos los cambios
+                    bw.flush();
                 }
 
                 // Damos la opcion al usuario de introducir otro empleado
