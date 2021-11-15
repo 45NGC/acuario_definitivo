@@ -116,14 +116,14 @@ public class Main {
                     +"3. Mostrar caja\n"
                     +"SALIR --> Pulse cualquier otro número\n"
             );
-            switch (Read.readInt()) {
+            switch (Teclado.leerInt()) {
                 case 1 -> gestion.mostrarProductos(catalogo);
                 case 2 -> {
                     System.out.println("¿Que producto desea comprar?");
                     gestion.mostrarNombreProductos(catalogo);
-                    lecturaProducto = Read.readInt();
+                    lecturaProducto = Teclado.leerInt();
                     System.out.println("¿Cuánta cantidad desea vender?");
-                    lecturaCantidad = Read.readInt();
+                    lecturaCantidad = Teclado.leerInt();
                     //Se carga el producto y la cantidad solicitada por el usuario
                     gestion.venderProducto(catalogo, lecturaProducto, lecturaCantidad);
                 }
