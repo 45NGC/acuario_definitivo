@@ -127,6 +127,7 @@ public class Main {
     }
 
     static void tienda() throws IOException{
+        Teclado t = new Teclado();
 
         System.out.println("Bienvenido a la tienda del acuario:\n"+
                 "El programa simula la gestión de la tienda del acuario.\n"+
@@ -162,15 +163,15 @@ public class Main {
                     +"3. Mostrar caja\n"
                     +"SALIR --> Pulse cualquier otro número\n"
             );
-            switch (Teclado.leerInt()) {
+            switch (t.leerInt()) {
                 case 1 : 
                     gestion.mostrarProductos(catalogo);
                 case 2 : {
                     System.out.println("¿Que producto desea comprar?");
                     gestion.mostrarNombreProductos(catalogo);
-                    lecturaProducto = Teclado.leerInt();
+                    lecturaProducto = t.leerInt();
                     System.out.println("¿Cuánta cantidad desea vender?");
-                    lecturaCantidad = Teclado.leerInt();
+                    lecturaCantidad = t.leerInt();
                     //Se carga el producto y la cantidad solicitada por el usuario
                     gestion.venderProducto(catalogo, lecturaProducto, lecturaCantidad);
                 }
@@ -277,7 +278,7 @@ public class Main {
             System.out.println();
             System.out.println("1- Listar empleados");
             System.out.println("2- Añadir un empleado");
-            System.out.println("2- Eliminar un empleado");
+            System.out.println("2- Cambiar un empleado");
             System.out.println();
             do{
                 System.out.println("Seleccione una opcion (0 para terminar) : ");
