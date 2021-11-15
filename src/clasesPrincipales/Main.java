@@ -1,16 +1,14 @@
 package clasesPrincipales;
 
+import afundidos.*;
 import mundoMarino.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.RandomAccess;
 
-import afundidos.Evento;
-import afundidos.Pecera;
-import afundidos.Pez;
 import mundoMarino.GestionTienda;
 import mundoMarino.Producto;
 import mundoMarino.productos.Comida;
@@ -84,7 +82,8 @@ public class Main {
     }
 
     static void clientes(){
-            
+        // Usuario usuario2 = new Cliente(1, "Cliente", new Date(1990, Calendar.JUNE, 13), "abcd1234.", 'C', false, 0);
+
     }
 
     static void ventaDeEntradas(){
@@ -95,32 +94,41 @@ public class Main {
         System.out.println("Creando un nuevo evento");
         Teclado t = new Teclado();
 
-        System.out.println("Introduce el nombre");
+        System.out.print(" - Introduce el nombre: ");
         String nombre = t.leerString();
 
-        System.out.println("Introduce el precio de la entrada");
+        System.out.print(" - Introduce el precio de la entrada: ");
         float precio = t.leerFloat();
 
-        System.out.println("Introduce la duración del evento");
+        System.out.print(" - Introduce la duración del evento: ");
         float duracion = t.leerFloat();
 
-        System.out.println("Introduce el requisito de edad");
+        System.out.print("I - ntroduce el requisito de eda: ");
         int requisitoEdad = t.leerInt();
 
-        System.out.println("Introduce el número de entradas disponibles");
+        System.out.print(" - Introduce el número de entradas disponibles: ");
         int contadorEntradas = t.leerInt();
 
-        System.out.println("Introduce el aforo máximo");
+        System.out.print(" - Introduce el aforo máximo: ");
         int aforo = t.leerInt();
 
-        System.out.println("Introduce el día");
-        int dia = t.leerInt();
+        int dia = -1;
+        while (dia<1 || dia > 31) {
+            System.out.print(" - Introduce el día: ");
+            dia = t.leerInt();
+        }
 
-        System.out.println("Introduce el mes");
-        int mes = t.leerInt();
+        int mes = -1;
+        while (mes<1 || mes > 12) {
+            System.out.print(" - Introduce el mes: ");
+            mes = t.leerInt();
+        }
 
-        System.out.println("Introduce el año");
-        int anho = t.leerInt();
+        int anho = -1;
+        while (anho<2000 || anho > 9999) {
+            System.out.print(" - Introduce el año: ");
+            anho = t.leerInt();
+        }
 
         Evento evento = new Evento(nombre, new Date(anho, mes, dia), precio, duracion, requisitoEdad, contadorEntradas, aforo);
 
@@ -184,48 +192,33 @@ public class Main {
     }
 
     static void peceras() throws IOException{
-        System.out.println("Creando una nueva pecera");
+        System.out.println(" # Iniciando el registro de pecera");
         Teclado t = new Teclado();
 
-        System.out.println("Introduce el ID");
+        System.out.print(" - Introduce el ID: ");
         int id = t.leerInt();
 
         String tipoDeAgua = "none";
 
         while(!tipoDeAgua.equals("dulce") && !tipoDeAgua.equals("salada")) {
-            System.out.println("Introduce el tipo de agua que tiene (Dulce/Salada)");
+            System.out.print(" - Introduce el tipo de agua que tiene (Dulce/Salada): ");
             tipoDeAgua = t.leerString().toLowerCase();
         }
 
         boolean tipoDeAguaBool = (tipoDeAgua.equals("dulce"));
 
-        System.out.println("Introduce la descripción de la pecera");
+        System.out.print(" - Introduce la descripción de la pecera: ");
         String descripcion = t.leerString();
 
-        System.out.println("Introduce la temperatura de la pecera");
+        System.out.print(" - Introduce la temperatura de la pecera: ");
         float temperatura = t.leerFloat();
 
-        System.out.println("Introduce el tamaño de la pecera");
+        System.out.print(" - Introduce el tamaño de la pecera: ");
         float tamano = t.leerFloat();
 
-        List<Pez> arrayPeces = new ArrayList<Pez>();
+        System.out.println(" -- Se inicializa el registro de peces para la pecera");
 
-        boolean fin = false;
-
-        System.out.println("Se inicializa el registro de peces para la pecera");
-        while(!fin) { // Se crea un array de peces
-            Pez pez = peces();
-            arrayPeces.add(pez);
-            String opcion = "null";
-            while (!opcion.equals("s") && !opcion.equals("n")) {
-                System.out.println("Desea añadir otro pez? (S/N)");
-                opcion = t.leerString().toLowerCase();
-            }
-            fin = opcion.equals("n");
-        }
-
-        Pez[] finalarrayPeces = new Pez[ arrayPeces.size() ];
-        arrayPeces.toArray( finalarrayPeces );
+        Pez[] finalarrayPeces = peces();
 
         Pecera pecera = new Pecera(id, tipoDeAguaBool, descripcion, temperatura, tamano, finalarrayPeces);
 
@@ -233,36 +226,130 @@ public class Main {
         pecera.listarPeces();
     }
 
-    static Pez peces() throws IOException{
-        System.out.println("Creando un nuevo pez");
-        Teclado t = new Teclado();
+    static Pez[] peces() throws IOException{ // Se inicia el registro de peces y devuelve una lista con todos.
+        System.out.println("# Inicia el registro de peces: ");
+        List<Pez> arrayPeces = new ArrayList<Pez>();
+        boolean fin = false;
+        while(!fin) {
+            System.out.println("Creando un nuevo pez");
+            Teclado t = new Teclado();
 
-        System.out.println("Introduce el ID");
-        int id = t.leerInt();
+            System.out.print(" - Introduce el ID: ");
+            int id = t.leerInt();
 
-        System.out.println("Introduce el nombre de la especie");
-        String especie = t.leerString();
+            System.out.print(" - Introduce el nombre de la especie: ");
+            String especie = t.leerString();
 
-        String tipoDeAgua = "none";
+            String tipoDeAgua = "none";
 
-        while(!tipoDeAgua.equals("dulce") && !tipoDeAgua.equals("salada")) {
-            System.out.println("Introduce el tipo de agua que necesita (Dulce/Salada)");
-            tipoDeAgua = t.leerString().toLowerCase();
+            while(!tipoDeAgua.equals("dulce") && !tipoDeAgua.equals("salada")) {
+                System.out.print(" - Introduce el tipo de agua que necesita (Dulce/Salada): ");
+                tipoDeAgua = t.leerString().toLowerCase();
+            }
+
+            boolean tipoDeAguaBool = (tipoDeAgua.equals("dulce"));
+
+            System.out.print(" - Introduce el ID de la piscina contenedora: ");
+            int piscinaContenedora = t.leerInt();
+
+            Pez pez = new Pez(id, especie, tipoDeAguaBool, piscinaContenedora);
+
+            arrayPeces.add(pez);
+            String opcion = "null";
+            while (!opcion.equals("s") && !opcion.equals("n")) {
+                System.out.print(" -- Desea añadir otro pez? (S/N): ");
+                opcion = t.leerString().toLowerCase();
+            }
+            fin = opcion.equals("n");
         }
 
-        boolean tipoDeAguaBool = (tipoDeAgua.equals("dulce"));
-
-        System.out.println("Introduce el ID de la piscina contenedora");
-        int piscinaContenedora = t.leerInt();
-
-        Pez pez = new Pez(id, especie, tipoDeAguaBool, piscinaContenedora);
-
-        pez.mostrarDatos();
-
-        return pez;
+        Pez[] finalarrayPeces = new Pez[ arrayPeces.size() ];
+        arrayPeces.toArray( finalarrayPeces );
+        return finalarrayPeces;
     }
 
-    static void empleados() throws IOException{
+    static Empleado[] empleados() throws IOException{ // Se inicia el registro de empleados y devuelve una lista con ellos.
+        System.out.println("# Inicia el registro de empleados: ");
+        List<Empleado> arrayEmpleados = new ArrayList<Empleado>();
+        boolean fin = false;
 
+        while(!fin) {
+            System.out.println("Registrando un nuevo empleado");
+            Teclado t = new Teclado();
+
+            System.out.print(" - Introduce el ID: ");
+            int id = t.leerInt();
+
+            System.out.print(" - Introduce el nombre: ");
+            String nombre = t.leerString();
+
+            System.out.print(" - Introduce el password: ");
+            String password = t.leerString();
+
+            char ocupacion = 'E';
+
+            System.out.print(" - Introduce el departamento asignado: ");
+            String departamento = t.leerString();
+
+            float horaDeEntrada = -1;
+            while (horaDeEntrada < 0 || horaDeEntrada > 24) {
+                System.out.print(" - Introduce la hora de entrada: ");
+                horaDeEntrada = t.leerFloat();
+            }
+
+            float horaDeSalida = -1;
+            while (horaDeSalida < horaDeEntrada || horaDeSalida > 24) {
+                System.out.print(" - Introduce la hora de salida: ");
+                horaDeSalida = t.leerFloat();
+            }
+
+            float horasTotales = horaDeSalida - horaDeEntrada;
+
+            String estado = "null";
+            while(!estado.equals("trabajando") && !estado.equals("vacaciones")) {
+                System.out.print(" - Introduce el estado (Trabajando/Vacaciones): ");
+                estado = t.leerString().toLowerCase();
+            }
+
+            boolean estadoBoolean = (estado.equals("trabajando"));
+
+            int dia = -1;
+            while (dia<1 || dia > 31) {
+                System.out.print(" - Introduce el día de nacimiento: ");
+                dia = t.leerInt();
+            }
+
+            int mes = -1;
+            while (mes<1 || mes > 12) {
+                System.out.print(" - Introduce el mes de nacimiento: ");
+                mes = t.leerInt();
+            }
+
+            int anho = -1;
+            while (anho<2000 || anho > 9999) {
+                System.out.print(" - Introduce el año de nacimiento: ");
+                anho = t.leerInt();
+            }
+
+            Empleado usuario = new Empleado(id, nombre, new Date(anho, mes, dia), password, ocupacion, departamento, horaDeEntrada, horaDeSalida, horasTotales, estadoBoolean);
+
+            arrayEmpleados.add(usuario);
+            String opcion = "null";
+
+            while (!opcion.equals("s") && !opcion.equals("n")) {
+                System.out.print(" -- Desea añadir otro empleado? (S/N): ");
+                opcion = t.leerString().toLowerCase();
+            }
+
+            fin = opcion.equals("n");
+        }
+
+        Empleado[] finalArrayEmpleados = new Empleado[ arrayEmpleados.size() ];
+        arrayEmpleados.toArray( finalArrayEmpleados );
+
+        for (Empleado empleado : arrayEmpleados) // Muestra los datos de todos los empleados
+            empleado.verInfoEmpleado();
+
+        return finalArrayEmpleados;
     }
 }
