@@ -2,6 +2,12 @@ package clasesPrincipales;
 
 import java.io.IOException;
 
+import mundoMarino.GestionTienda;
+import mundoMarino.Producto;
+import mundoMarino.productos.Comida;
+import mundoMarino.productos.Peluche;
+import ventaEntradas.Menu;
+
 public class Main {
 
     //Rutas de acceso a los ficheros
@@ -69,18 +75,18 @@ public class Main {
     }
 
     static void clientes(){
-
+            
     }
 
     static void ventaDeEntradas(){
-
+        Menu.Venta();
     }
 
     static void eventos(){
 
     }
 
-    static void tienda(){
+    static void tienda() throws IOException{
 
         System.out.println("Bienvenido a la tienda del acuario:\n"+
                 "El programa simula la gestión de la tienda del acuario.\n"+
@@ -117,8 +123,9 @@ public class Main {
                     +"SALIR --> Pulse cualquier otro número\n"
             );
             switch (Teclado.leerInt()) {
-                case 1 -> gestion.mostrarProductos(catalogo);
-                case 2 -> {
+                case 1 : 
+                    gestion.mostrarProductos(catalogo);
+                case 2 : {
                     System.out.println("¿Que producto desea comprar?");
                     gestion.mostrarNombreProductos(catalogo);
                     lecturaProducto = Teclado.leerInt();
@@ -127,8 +134,8 @@ public class Main {
                     //Se carga el producto y la cantidad solicitada por el usuario
                     gestion.venderProducto(catalogo, lecturaProducto, lecturaCantidad);
                 }
-                case 3 -> System.out.println(gestion.mostrarCaja() + " €");
-                default -> continuar = false;
+                case 3 : System.out.println(gestion.mostrarCaja() + " €");
+                default : continuar = false;
             }
 
         } while(continuar);

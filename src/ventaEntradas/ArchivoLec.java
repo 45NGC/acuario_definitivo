@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class ArchivoLec {
     
-    static final String ruta ="acuario_definitivo\\data\\";
+    static final String ruta ="data\\ventas\\";
     //Atributos
     private String tamaño;
     private String tipo;

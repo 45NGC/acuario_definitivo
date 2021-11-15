@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class ArchivosRead {
  
-    static final String ruta = "C:\\Users\\Developer\\Desktop\\Archivo\\";
+    static final String ruta = "data\\ventas\\";
     static void read(int op,boolean benef, String strFecha) {
         //op - Si dia especifico o total.
         //benef - Si enseña los beneficios o no.
