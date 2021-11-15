@@ -3,7 +3,13 @@ package clasesPrincipales;
 import mundoMarino.*;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
+import afundidos.Evento;
+import afundidos.Pecera;
+import afundidos.Pez;
 import mundoMarino.GestionTienda;
 import mundoMarino.Producto;
 import mundoMarino.productos.Comida;
@@ -84,8 +90,40 @@ public class Main {
         Menu.Venta();
     }
 
-    static void eventos(){
+    static void eventos() throws IOException{
+        System.out.println("Creando un nuevo evento");
+        Teclado t = new Teclado();
 
+        System.out.println("Introduce el nombre");
+        String nombre = t.leerString();
+
+        System.out.println("Introduce el precio de la entrada");
+        float precio = t.leerFloat();
+
+        System.out.println("Introduce la duración del evento");
+        float duracion = t.leerFloat();
+
+        System.out.println("Introduce el requisito de edad");
+        int requisitoEdad = t.leerInt();
+
+        System.out.println("Introduce el número de entradas disponibles");
+        int contadorEntradas = t.leerInt();
+
+        System.out.println("Introduce el aforo máximo");
+        int aforo = t.leerInt();
+
+        System.out.println("Introduce el día");
+        int dia = t.leerInt();
+
+        System.out.println("Introduce el mes");
+        int mes = t.leerInt();
+
+        System.out.println("Introduce el año");
+        int anho = t.leerInt();
+
+        Evento evento = new Evento(nombre, new Date(anho, mes, dia), precio, duracion, requisitoEdad, contadorEntradas, aforo);
+
+        evento.mostrarDatos();
     }
 
     static void tienda() throws IOException{
@@ -143,12 +181,83 @@ public class Main {
         } while(continuar);
     }
 
-    static void peceras(){
+    static void peceras() throws IOException{
+        System.out.println("Creando una nueva pecera");
+        Teclado t = new Teclado();
 
+        System.out.println("Introduce el ID");
+        int id = t.leerInt();
+
+        String tipoDeAgua = "none";
+
+        while(!tipoDeAgua.equals("dulce") && !tipoDeAgua.equals("salada")) {
+            System.out.println("Introduce el tipo de agua que tiene (Dulce/Salada)");
+            tipoDeAgua = t.leerString().toLowerCase();
+        }
+
+        boolean tipoDeAguaBool = (tipoDeAgua.equals("dulce"));
+
+        System.out.println("Introduce la descripción de la pecera");
+        String descripcion = t.leerString();
+
+        System.out.println("Introduce la temperatura de la pecera");
+        float temperatura = t.leerFloat();
+
+        System.out.println("Introduce el tamaño de la pecera");
+        float tamano = t.leerFloat();
+
+        List<Pez> arrayPeces = new ArrayList<Pez>();
+
+        boolean fin = false;
+
+        System.out.println("Se inicializa el registro de peces para la pecera");
+        while(!fin) { // Se crea un array de peces
+            Pez pez = peces();
+            arrayPeces.add(pez);
+            String opcion = "null";
+            while (!opcion.equals("s") && !opcion.equals("n")) {
+                System.out.println("Desea añadir otro pez? (S/N)");
+                opcion = t.leerString().toLowerCase();
+            }
+            fin = opcion.equals("n");
+        }
+
+        Pez[] finalarrayPeces = new Pez[ arrayPeces.size() ];
+        arrayPeces.toArray( finalarrayPeces );
+
+        Pecera pecera = new Pecera(id, tipoDeAguaBool, descripcion, temperatura, tamano, finalarrayPeces);
+
+        pecera.mostrarCaracteristicas();
+        pecera.listarPeces();
     }
 
-    static void peces(){
+    static Pez peces() throws IOException{
+        System.out.println("Creando un nuevo pez");
+        Teclado t = new Teclado();
 
+        System.out.println("Introduce el ID");
+        int id = t.leerInt();
+
+        System.out.println("Introduce el nombre de la especie");
+        String especie = t.leerString();
+
+        String tipoDeAgua = "none";
+
+        while(!tipoDeAgua.equals("dulce") && !tipoDeAgua.equals("salada")) {
+            System.out.println("Introduce el tipo de agua que necesita (Dulce/Salada)");
+            tipoDeAgua = t.leerString().toLowerCase();
+        }
+
+        boolean tipoDeAguaBool = (tipoDeAgua.equals("dulce"));
+
+        System.out.println("Introduce el ID de la piscina contenedora");
+        int piscinaContenedora = t.leerInt();
+
+        Pez pez = new Pez(id, especie, tipoDeAguaBool, piscinaContenedora);
+
+        pez.mostrarDatos();
+
+        return pez;
     }
 
     static void menuPrincipalempleados() throws IOException{
