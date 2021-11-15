@@ -30,7 +30,7 @@ public class Main {
             opcionMenuPrincipal = menuPrincipal();
             switch (opcionMenuPrincipal){
                 case 1 :
-                    clientes();
+                    menuClientes(t);
                     break;
                 case 2:
                     ventaDeEntradas();
@@ -82,9 +82,93 @@ public class Main {
     }
 
     static void clientes(){
-        // Usuario usuario2 = new Cliente(1, "Cliente", new Date(1990, Calendar.JUNE, 13), "abcd1234.", 'C', false, 0);
 
     }
+    
+    static void mostrarCliente() throws IOException{
+        Teclado t= new Teclado();
+        Cliente c= new Cliente(0,"", "", "", "","", 0, "", "",0);
+        int numVisitante;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente,"rw");
+        do {
+            System.out.println("Teclee el numero de visitante de la persona a consultar: ");
+            numVisitante= t.leerInt();
+        }while(numVisitante==Integer.MIN_VALUE);
+        fich.seek(numVisitante * c.tamano());
+        c.leerDeArchivo(fich);
+        if(c.getNumVisitante()!=0)
+            c.mostrarDatos();
+        else
+            System.out.println("El registro buscado no existe.");
+        fich.close();
+    }
+    static void valoracionCliente()throws IOException{
+        Teclado t= new Teclado();
+        int opcion;
+
+        do{
+            do{
+                System.out.println();
+                System.out.println();
+                System.out.println();
+                System.out.println("  Elige una opcion");
+                System.out.println();
+                System.out.println("1: Valoracion de un cliente determinado");
+                System.out.println("2: Media de las valoraciones(de todos los clientes)");
+                System.out.println("3: Salir");
+                System.out.println();
+
+                System.out.println("Seleccione una opcion (3 para terminar) : ");
+                opcion=t.leerInt();
+            }while(opcion<1 || opcion>3);
+            switch(opcion) {
+
+                case 1:
+                    valoracionIndividual();
+                    break;
+                case 2:
+                    valoracionTotal();
+                    break;
+                case 3:
+                    System.out.print("Has elegido la opcion salir");
+                    break;
+            }
+        }while(opcion!=3);
+    }
+    static void valoracionIndividual()throws IOException{
+        Teclado t= new Teclado();
+        Cliente c= new Cliente(0,"", "", "", "","", 0, "", "",0);
+        int numVisitante;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente,"rw");
+        do {
+            System.out.println("Teclee el numero de visitante de la persona a consultar: ");
+            numVisitante= t.leerInt();
+        }while(numVisitante==Integer.MIN_VALUE);
+        fich.seek(numVisitante * c.tamano());
+        c.leerDeArchivo(fich);
+        if(c.getNumVisitante()!=0)
+            c.mostrarDatosValoracion();
+        else
+            System.out.println("El registro buscado no existe.");
+        fich.close();
+    }
+
+    static void valoracionTotal() throws IOException {
+        int i=0, totalValoracion=0;
+        RandomAccessFile fich = new RandomAccessFile(rutaCliente,"r");
+        do {
+            i++;
+            Cliente c = new Cliente (0,"", "", "", "","", 0, "", "",0);
+            fich.seek(i * c.tamano());
+            if(c.leerDeArchivo(fich)) {
+                break;
+            }
+            totalValoracion += c.getvaloracion();
+        } while(true);
+        System.out.println("Media de valoraciones: "+(totalValoracion/i));
+    }
+
+    /* FINAL CLIENTES */
 
     static void ventaDeEntradas(){
         Menu.Venta();
