@@ -263,9 +263,13 @@ public class Main {
             fin = opcion.equals("n");
         }
 
-        Pez[] finalarrayPeces = new Pez[ arrayPeces.size() ];
-        arrayPeces.toArray( finalarrayPeces );
-        return finalarrayPeces;
+        Pez[] finalArrayPeces = new Pez[ arrayPeces.size() ];
+        arrayPeces.toArray( finalArrayPeces );
+
+        for (Pez pez : finalArrayPeces) // Muestra los datos de todos los peces
+            pez.mostrarDatos();
+
+        return finalArrayPeces;
     }
 
     static Empleado[] empleados() throws IOException{ // Se inicia el registro de empleados y devuelve una lista con ellos.
