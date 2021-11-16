@@ -48,7 +48,7 @@ public class Main {
                     peces();
                     break;
                 case 7:
-                    empleados();
+                    menuPrincipalEmpleados();
                     break;
                 case 8:
                     fin = true;
@@ -434,88 +434,171 @@ public class Main {
         return finalArrayPeces;
     }
 
-    static Empleado[] empleados() throws IOException{ // Se inicia el registro de empleados y devuelve una lista con ellos.
-        System.out.println("# Inicia el registro de empleados: ");
-        List<Empleado> arrayEmpleados = new ArrayList<Empleado>();
+    static void menuPrincipalEmpleados() throws IOException{
+        Teclado entrada=new Teclado();
+        boolean fin=false;
+        int opcionMenuEmpleados;
+        do{
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            System.out.println("MENU EMPLEADOS");
+            System.out.println();
+            System.out.println("1- Listar empleados");
+            System.out.println("2- Añadir un empleado");
+            System.out.println("3- Cambiar un empleado");
+            System.out.println();
+            do{
+                System.out.println("Seleccione una opcion (0 para terminar) : ");
+                opcionMenuEmpleados=entrada.leerInt();
+            }while(opcionMenuEmpleados<0 || opcionMenuEmpleados>3);
+
+            switch (opcionMenuEmpleados){
+                case 0 -> fin=true;
+                case 1 -> listaEmpledos();
+                case 2 -> anadirEmpleado();
+                case 3 -> cambiarDatosEmpleado();
+            }
+        }while(!fin);
+    }
+
+    static void listaEmpledos() throws IOException{
+        RandomAccessFile ficheroRandom = new RandomAccessFile(rutaEmpleados, "r");
+        FileReader lector = new FileReader (rutaEmpleados);
+        BufferedReader br = new BufferedReader(lector);
+        int i;
+        String linea;
+        // Este for recorre el fichero 'empleados' y en caso de que no sean nulos los imprime
+        // Cuando se encuentra una linea null se termina el for
+        for(i=1;i<ficheroRandom.length();i++){
+            ficheroRandom.seek(i);
+            linea=br.readLine();
+
+            if(linea!=null){
+                System.out.println();
+                System.out.println("Empleado "+i+" : "+linea);
+                System.out.println();
+            }
+        }
+        ficheroRandom.close();
+    }
+
+    static void anadirEmpleado() throws IOException {
+        Teclado t = new Teclado();
+        int i=1, otro, confirmacion;
+        String datosEmpleado;
         boolean fin = false;
 
-        while(!fin) {
-            System.out.println("Registrando un nuevo empleado");
-            Teclado t = new Teclado();
+        // Le pedimos los datos del empleado al usuario, que son los siguientes:
+        // id - nombreApellidos - dni - tipoTrabajo - horasTrabajo - sueldo - vacaciones - valoracion
 
-            System.out.print(" - Introduce el ID: ");
-            int id = t.leerInt();
+        String nombreApellidos, dni, tipoTrabajo;
+        int id, horasTrabajo, sueldo, vacaciones, valoracion;
 
-            System.out.print(" - Introduce el nombre: ");
-            String nombre = t.leerString();
+        // A continuacion se nos presenta un bucle do-while para introducir empleados
+        do {
+            // Instanciamos el fichero random, el buffered reader, y el buffered writer
+            RandomAccessFile ficheroRandom = new RandomAccessFile(rutaEmpleados, "rw");
+            FileReader lector = new FileReader (rutaEmpleados);
+            FileWriter escritor = new FileWriter(rutaEmpleados, true);
+            BufferedReader br = new BufferedReader(lector);
+            BufferedWriter bw = new BufferedWriter(escritor);
 
-            System.out.print(" - Introduce el password: ");
-            String password = t.leerString();
+            // Introducimos el id, en caso de que el usuario no introduza el numero 0
+            // el programa regresa al menu empleados
+            do {
+                System.out.println("Introduza el ID del empleado (4 numeros)");
+                System.out.println("Si no desea introducir ningun empleado teclee 0");
+                id = t.leerInt();
+            } while ((id < 1000 || id > 9999) && id != 0);
 
-            char ocupacion = 'E';
+            if (id == 0) {
+                fin = true;
+            } else {
 
-            System.out.print(" - Introduce el departamento asignado: ");
-            String departamento = t.leerString();
+                do {
+                    System.out.println("Introduza el nombre y los apellidos del empleado :");
+                    nombreApellidos = t.leerString();
+                } while (nombreApellidos.length() > 40);
 
-            float horaDeEntrada = -1;
-            while (horaDeEntrada < 0 || horaDeEntrada > 24) {
-                System.out.print(" - Introduce la hora de entrada: ");
-                horaDeEntrada = t.leerFloat();
+                do {
+                    System.out.println("Introduza el DNI del empleado :");
+                    dni = t.leerString();
+                } while (dni.length() != 9);
+
+                do {
+                    System.out.println("Introduza el tipo de trabajo desempeñado por el empleado :");
+                    tipoTrabajo = t.leerString();
+                } while (tipoTrabajo.length() > 40);
+
+                do {
+                    System.out.println("Introduza las horas de trabajo del empleado :");
+                    horasTrabajo = t.leerInt();
+                } while (horasTrabajo > 8);
+
+                do {
+                    System.out.println("Introduza el numero de dias de vacaciones del empleado :");
+                    vacaciones = t.leerInt();
+                } while (vacaciones < 35);
+
+                do {
+                    System.out.println("Introduza el sueldo del empleado :");
+                    sueldo = t.leerInt();
+                } while (sueldo < 900);
+
+                do {
+                    System.out.println("Introduza la valoracion del empleado :");
+                    valoracion = t.leerInt();
+                } while (valoracion > 10 || valoracion < 0);
+
+
+                datosEmpleado = id + "   " + nombreApellidos + "   " + dni + "   " + tipoTrabajo + "   " + horasTrabajo + "   " + sueldo + "   " + vacaciones + "   " + valoracion;
+                // Mostramos al usuario los valores introducidos y le preguntamos si desearia cancelar la introduccion de los mismos
+                do {
+                    System.out.println(datosEmpleado);
+                    System.out.println("¿Desea introducir los siguientes datos?  (1=si 0=no) : ");
+                    confirmacion = t.leerInt();
+                } while (confirmacion > 1 || confirmacion < 0);
+
+                if (confirmacion == 0) {
+                    System.out.println("La introduccion del empleado fue cancelada");
+                } else {
+                    // Este for recorre el fichero 'empleados' y en caso de que encuentre una linea nula (vacia)
+                    // termina el for y el escritor se posiciona en la linea determinada
+                    int cont=1;
+                    String linea;
+                    do{
+
+                        ficheroRandom.seek(i);
+                        linea = br.readLine();
+                        if(linea!=null)
+                            cont++;
+
+                    }while(linea != null);
+
+
+                    // Escribimos los datos del empleado en una linea nueva del archivo gracias a '\n'
+                    bw.write("\n"+datosEmpleado);
+                    // Guardamos los cambios
+                    bw.flush();
+                }
+
+                // Damos la opcion al usuario de introducir otro empleado
+                do {
+                    System.out.println("¿Desea introducir otro empleado?  (1=si 0=no) : ");
+                    otro = t.leerInt();
+                } while (otro > 1 || otro < 0);
+                if (otro == 0) {
+                    fin = true;
+                }
             }
+            ficheroRandom.close();
+        } while (!fin);
+    }
 
-            float horaDeSalida = -1;
-            while (horaDeSalida < horaDeEntrada || horaDeSalida > 24) {
-                System.out.print(" - Introduce la hora de salida: ");
-                horaDeSalida = t.leerFloat();
-            }
-
-            float horasTotales = horaDeSalida - horaDeEntrada;
-
-            String estado = "null";
-            while(!estado.equals("trabajando") && !estado.equals("vacaciones")) {
-                System.out.print(" - Introduce el estado (Trabajando/Vacaciones): ");
-                estado = t.leerString().toLowerCase();
-            }
-
-            boolean estadoBoolean = (estado.equals("trabajando"));
-
-            int dia = -1;
-            while (dia<1 || dia > 31) {
-                System.out.print(" - Introduce el día de nacimiento: ");
-                dia = t.leerInt();
-            }
-
-            int mes = -1;
-            while (mes<1 || mes > 12) {
-                System.out.print(" - Introduce el mes de nacimiento: ");
-                mes = t.leerInt();
-            }
-
-            int anho = -1;
-            while (anho<2000 || anho > 9999) {
-                System.out.print(" - Introduce el año de nacimiento: ");
-                anho = t.leerInt();
-            }
-
-            Empleado usuario = new Empleado(id, nombre, new Date(anho, mes, dia), password, ocupacion, departamento, horaDeEntrada, horaDeSalida, horasTotales, estadoBoolean);
-
-            arrayEmpleados.add(usuario);
-            String opcion = "null";
-
-            while (!opcion.equals("s") && !opcion.equals("n")) {
-                System.out.print(" -- Desea añadir otro empleado? (S/N): ");
-                opcion = t.leerString().toLowerCase();
-            }
-
-            fin = opcion.equals("n");
-        }
-
-        Empleado[] finalArrayEmpleados = new Empleado[ arrayEmpleados.size() ];
-        arrayEmpleados.toArray( finalArrayEmpleados );
-
-        for (Empleado empleado : arrayEmpleados) // Muestra los datos de todos los empleados
-            empleado.verInfoEmpleado();
-
-        return finalArrayEmpleados;
+    static void cambiarDatosEmpleado(){
+        System.out.println();
+        System.out.println("Si desea eliminar o cambiar los datos de un empleado puede hacerlo en el siguiente directorio: "+rutaEmpleados);
+        System.out.println();
     }
 }
