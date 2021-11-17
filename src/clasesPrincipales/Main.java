@@ -266,7 +266,7 @@ public class Main {
         System.out.print(" - Introduce la duración del evento: ");
         float duracion = t.leerFloat();
 
-        System.out.print("I - ntroduce el requisito de eda: ");
+        System.out.print(" - Introduce el requisito de edad: ");
         int requisitoEdad = t.leerInt();
 
         System.out.print(" - Introduce el número de entradas disponibles: ");
