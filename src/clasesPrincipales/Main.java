@@ -485,7 +485,7 @@ public class Main {
 
     static void anadirEmpleado() throws IOException {
         Teclado t = new Teclado();
-        int i=1, otro, confirmacion;
+        int otro, confirmacion;
         String datosEmpleado;
         boolean fin = false;
 
@@ -563,17 +563,11 @@ public class Main {
                 if (confirmacion == 0) {
                     System.out.println("La introduccion del empleado fue cancelada");
                 } else {
-                    // Este for recorre el fichero 'empleados' y en caso de que encuentre una linea nula (vacia)
-                    // termina el for y el escritor se posiciona en la linea determinada
-                    int cont=1;
+                    // Este do-while recorre el fichero 'empleados' y en caso de que encuentre una linea nula (vacia)
+                    // termina el bucle y el escritor se posiciona en la linea determinada
                     String linea;
                     do{
-
-                        ficheroRandom.seek(i);
                         linea = br.readLine();
-                        if(linea!=null)
-                            cont++;
-
                     }while(linea != null);
 
 
