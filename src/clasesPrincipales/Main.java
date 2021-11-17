@@ -18,7 +18,7 @@ import ventaEntradas.Menu;
 public class Main {
 
     //Rutas de acceso a los ficheros
-    static final String rutaCliente ="acuario_definitivo\\data\\clientes.dat";
+    static final String rutaCliente ="data\\clientes.dat";
     static final String rutaEmpleados = "data\\Empleados.dat";
 
     public static void main(String[]args) throws IOException{
@@ -454,10 +454,18 @@ public class Main {
             }while(opcionMenuEmpleados<0 || opcionMenuEmpleados>3);
 
             switch (opcionMenuEmpleados){
-                case 0 -> fin=true;
-                case 1 -> listaEmpledos();
-                case 2 -> anadirEmpleado();
-                case 3 -> cambiarDatosEmpleado();
+                case 0 :
+                    fin=true;
+                    break;
+                case 1 :
+                    listaEmpledos();
+                    break;
+                case 2 :
+                    anadirEmpleado();
+                    break;
+                case 3 :
+                    cambiarDatosEmpleado();
+                    break;
             }
         }while(!fin);
     }
