@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import mundoMarino.Empleado;
 import mundoMarino.GestionTienda;
 import mundoMarino.Producto;
 import mundoMarino.productos.Comida;
@@ -571,6 +572,8 @@ public class Main {
                 if (confirmacion == 0) {
                     System.out.println("La introduccion del empleado fue cancelada");
                 } else {
+                    // Creamos un empleado
+                    Empleado empleado = new Empleado(id, nombreApellidos, dni, tipoTrabajo, horasTrabajo, sueldo, vacaciones, valoracion);
                     // Este do-while recorre el fichero 'empleados' y en caso de que encuentre una linea nula (vacia)
                     // termina el bucle y el escritor se posiciona en la linea determinada
                     String linea;
