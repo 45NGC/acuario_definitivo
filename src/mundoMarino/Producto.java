@@ -2,6 +2,7 @@ package mundoMarino;
 
 /* Author: Javier Miralles Rancaño */
 
+
 public abstract class Producto {
 
     /* Atributes */

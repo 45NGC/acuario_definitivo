@@ -298,7 +298,7 @@ public class Main {
         evento.mostrarDatos();
     }
 
-    static void tienda() throws IOException{
+    static void tienda() throws IOException {
         Teclado t = new Teclado();
 
         System.out.println("Bienvenido a la tienda del acuario:\n"+
@@ -308,7 +308,7 @@ public class Main {
                 "\t Comprar productos de los existentes.\n"+
                 "\t Añadir nuevos productos a la cesta.\n"+
                 "\t Consultar el importe de la cuenta.");
-        
+
         boolean continuar=true;
         int lecturaProducto, lecturaCantidad; //Variables para seleccionar el producto y la cantidad que se quiere comprar
 
@@ -336,9 +336,8 @@ public class Main {
                     +"SALIR --> Pulse cualquier otro número\n"
             );
             switch (t.leerInt()) {
-                case 1 : 
-                    gestion.mostrarProductos(catalogo);
-                case 2 : {
+                case 1 -> gestion.mostrarProductos(catalogo);
+                case 2 -> {
                     System.out.println("¿Que producto desea comprar?");
                     gestion.mostrarNombreProductos(catalogo);
                     lecturaProducto = t.leerInt();
@@ -347,8 +346,8 @@ public class Main {
                     //Se carga el producto y la cantidad solicitada por el usuario
                     gestion.venderProducto(catalogo, lecturaProducto, lecturaCantidad);
                 }
-                case 3 : System.out.println(gestion.mostrarCaja() + " €");
-                default : continuar = false;
+                case 3 -> System.out.println(gestion.mostrarCaja() + " €");
+                default -> continuar = false;
             }
 
         } while(continuar);
