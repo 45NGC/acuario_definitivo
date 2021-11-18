@@ -78,7 +78,7 @@ public class Menu {
                             ArchivosRead.read(1,true,""); //read tiene que recibir fecha
                             break;
                     }
-                case 4:
+                default:
                     otra = 0;
             }
         
