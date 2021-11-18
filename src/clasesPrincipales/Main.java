@@ -255,7 +255,7 @@ public class Main {
             i++;
             Cliente c = new Cliente (0,"", "", "", "","", 0, "", "",0);
             try {
-                fich.seek(numVisitante * c.tamano());
+                fich.seek(i * c.tamano());
             }catch (IOException ioe){
                 fich.seek(Integer.MAX_VALUE);
             }
