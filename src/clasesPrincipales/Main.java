@@ -135,7 +135,11 @@ public class Main {
             System.out.println("Teclee el numero de visitante de la persona a consultar: ");
             numVisitante= t.leerInt();
         }while(numVisitante==Integer.MIN_VALUE);
-        fich.seek(numVisitante * c.tamano());
+        try {
+            fich.seek(numVisitante * c.tamano());
+        }catch (IOException ioe){
+            fich.seek(Integer.MAX_VALUE);
+        }
         c.leerDeArchivo(fich);
         if(c.getNumVisitante()!=0)
             c.mostrarDatosEntrada();
