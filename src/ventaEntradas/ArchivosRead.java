@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class ArchivosRead {
  
     static final String ruta = "data\\ventas\\";
-    static void read(int op,boolean benef, String strFecha) {
+    static void read(boolean op,boolean benef, String strFecha) {
         //op - Si dia especifico o total.
         //benef - Si enseña los beneficios o no.
         
@@ -37,7 +37,7 @@ public class ArchivosRead {
                 tamano=sal.readLine();
                 tipo=sal.readLine();
                 
-                 if(op==1){
+                 if(op){
                         System.out.println(fecha+" | "+precio+" | "+tamano+" | "+tipo);
                         preciotot+=Double.parseDouble(precio);
                         
@@ -45,7 +45,7 @@ public class ArchivosRead {
                         contador+=1;
                         
                         }
-                    }else if(op==2&&fecha.equalsIgnoreCase(strFecha)){ //Si la fecha de la entrada coincide con la actual
+                    }else if(op==false&&fecha.equalsIgnoreCase(strFecha)){ //Si la fecha de la entrada coincide con la actual
                         System.out.println(fecha+" | "+precio+" | "+tamano+" | "+tipo);
                         preciotot+=Double.parseDouble(precio);;
                         }
@@ -112,7 +112,7 @@ public class ArchivosRead {
         
         String strFecha = "" + año + "-" + mes + "-" + dia;
         
-        read(2,benef,strFecha);
+        read(false,benef,strFecha);
     }
     
     static void fechaAct(boolean benef){ //Coge la fecha actual y se la manda a read
@@ -120,7 +120,7 @@ public class ArchivosRead {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  //la convertimos a ese formato
         String strFecha = dateFormat.format(fechaAct); //La pasamos a str
         
-        read(2,benef, strFecha);
+        read(false,benef, strFecha);
     }
     
     static void beneficios(double precio,int contador){

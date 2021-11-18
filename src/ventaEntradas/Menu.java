@@ -7,7 +7,7 @@ public class Menu {
     
     public static void Venta() {
         int opcion=0;
-        int otra=1;
+        boolean otra =true;
         Scanner ent = new Scanner(System.in);
        
         do{
@@ -47,7 +47,7 @@ public class Menu {
                             ArchivosRead.fechaEsp(false);
                             break;
                         case 3: // 3 = Ventas totales
-                            ArchivosRead.read(1,false,""); //read tiene que recibir fecha
+                            ArchivosRead.read(true,false,""); //read tiene que recibir fecha
                             break;
                     }
             
@@ -75,15 +75,15 @@ public class Menu {
                             ArchivosRead.fechaEsp(true);
                             break;
                         case 3: //3 = Beneficios totales
-                            ArchivosRead.read(1,true,""); //read tiene que recibir fecha
+                            ArchivosRead.read(true,true,""); //read tiene que recibir fecha
                             break;
                     }
                 default:
-                    otra = 0;
+                    otra = false;
             }
         
           
-        }while(otra==1);
+        }while(otra==true);
         
     }
 
