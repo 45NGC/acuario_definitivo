@@ -157,7 +157,11 @@ public class Main {
             System.out.println("Teclee el numero de visitante de la persona a consultar: ");
             numVisitante= t.leerInt();
         }while(numVisitante==Integer.MIN_VALUE);
-        fich.seek(numVisitante * c.tamano());
+        try {
+            fich.seek(numVisitante * c.tamano());
+        }catch (IOException ioe){
+            fich.seek(Integer.MAX_VALUE);
+        }
         c.leerDeArchivo(fich);
         if(c.getNumVisitante()!=0)
             c.mostrarDatosSalida();
@@ -175,7 +179,11 @@ public class Main {
             System.out.println("Teclee el numero de visitante de la persona a consultar: ");
             numVisitante= t.leerInt();
         }while(numVisitante==Integer.MIN_VALUE);
-        fich.seek(numVisitante * c.tamano());
+        try {
+            fich.seek(numVisitante * c.tamano());
+        }catch (IOException ioe){
+            fich.seek(Integer.MAX_VALUE);
+        }
         c.leerDeArchivo(fich);
         if(c.getNumVisitante()!=0)
             c.mostrarDatos();
@@ -227,7 +235,11 @@ public class Main {
             System.out.println("Teclee el numero de visitante de la persona a consultar: ");
             numVisitante= t.leerInt();
         }while(numVisitante==Integer.MIN_VALUE);
-        fich.seek(numVisitante * c.tamano());
+        try {
+            fich.seek(numVisitante * c.tamano());
+        }catch (IOException ioe){
+            fich.seek(Integer.MAX_VALUE);
+        }
         c.leerDeArchivo(fich);
         if(c.getNumVisitante()!=0)
             c.mostrarDatosValoracion();
@@ -242,7 +254,11 @@ public class Main {
         do {
             i++;
             Cliente c = new Cliente (0,"", "", "", "","", 0, "", "",0);
-            fich.seek(i * c.tamano());
+            try {
+                fich.seek(numVisitante * c.tamano());
+            }catch (IOException ioe){
+                fich.seek(Integer.MAX_VALUE);
+            }
             if(c.leerDeArchivo(fich)) {
                 break;
             }
