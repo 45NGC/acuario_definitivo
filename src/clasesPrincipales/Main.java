@@ -269,7 +269,7 @@ public class Main {
 
     /* FINAL CLIENTES */
 
-    static void ventaDeEntradas(){
+    static void ventaDeEntradas() throws IOException {
         Menu.Venta();
     }
 

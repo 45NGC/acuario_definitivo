@@ -1,38 +1,35 @@
 package ventaEntradas;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import clasesPrincipales.Teclado;
 
 public class Menu {
     
-    public static void Venta() {
+    public static void Venta() throws IOException {
         int opcion=0;
         boolean otra =true;
         Scanner ent = new Scanner(System.in);
-       
+
+
         do{
             System.out.println("Que quieres hacer");
             System.out.println("1= Comprar entradas \n2= Historial de ventas \n3= Beneficios \nOtro= Salir");
             
-            try{
-               opcion = ent.nextInt(); //Falta asegurar la entrada 
-            }catch(InputMismatchException ime){
-                opcion=4;}
+
+            opcion = Teclado.leerInt();
+
                 
             switch(opcion){ //Las opciones del menu
                 case 1: //1= Comprar entradas
                     VentaEntrada.Entrada();
                     break;
                 case 2: //2= Historial de ventas
-                    System.out.println("1= Ventas de hoy, 3= Ventas de dia especifico, 2= Ventas totales");
+                    System.out.println("1= Ventas de hoy, 2= Ventas de dia especifico, 3= Ventas totales");
                     
                     do{ //Asegura que la opcion exista.
-                        try{
-                        opcion = ent.nextInt();
-                        }catch(InputMismatchException ime){
-                            ent.next();
-                            opcion=4;
-                        }
+                        opcion=Teclado.leerInt();
                         if(opcion<1 || opcion >3){
                             System.out.println("Esa no es una opcion");
                         }
@@ -56,12 +53,8 @@ public class Menu {
                 case 3: //Beneficios
                     System.out.println("1= Beneficios de hoy, 2= Beneficios de dia especifico, 3= Beneficios totales");
                     do{//Asegura que la opcion exista.
-                        try{
-                        opcion = ent.nextInt();
-                        }catch(InputMismatchException ime){
-                            ent.next();
-                            opcion=4;
-                        }
+                        opcion= Teclado.leerInt();
+
                         if(opcion<1 || opcion >3){
                             System.out.println("Esa no es una opcion");
                         }
@@ -78,6 +71,8 @@ public class Menu {
                             ArchivosRead.read(true,true,""); //read tiene que recibir fecha
                             break;
                     }
+
+                    break;
                 default:
                     otra = false;
             }

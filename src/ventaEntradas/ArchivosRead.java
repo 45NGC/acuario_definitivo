@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import clasesPrincipales.Teclado;
+
 
 public class ArchivosRead {
  
@@ -63,7 +65,7 @@ public class ArchivosRead {
     
     
     
-    static void fechaEsp(boolean benef){ //Pregunta una fecha y se la manda a read
+    static void fechaEsp(boolean benef) throws IOException { //Pregunta una fecha y se la manda a read
         
         Scanner ent = new Scanner(System.in);
         int dia=0; int mes=0; int año=0;
@@ -71,25 +73,14 @@ public class ArchivosRead {
         System.out.println("Año:");
         
         do{ //Si algo no es un nº o < 0 lo vuelve a preguntar
-            try{
-                año=ent.nextInt();
-            }catch(InputMismatchException ime){
-                año=-2;
-            }
-            
+            año = Teclado.leerInt();
             if(año<0){System.out.println("Año invalido");}
         }while(año < 0);
         
         System.out.println("Mes:");
         
         do{ //Comprueba que el nº sea posible
-            try{ //Comprueba que sea numero
-                mes=ent.nextInt();}
-            catch(InputMismatchException ime){
-                ent.next();
-                mes=45;
-            }
-            
+            mes= Teclado.leerInt();
             if(mes<1 || mes>12){
                 System.out.println("Ese mes no existe");
             }
@@ -98,13 +89,7 @@ public class ArchivosRead {
         
         System.out.println("Dia:");
         do{ //Comprueba que el nº sea posible
-            try{ //Comprueba que sea numero
-                dia=ent.nextInt();}
-            catch(InputMismatchException ime){
-                ent.next();
-                dia=45;
-            }
-            
+            dia = Teclado.leerInt();
             if(dia<1 || dia>31){
                 System.out.println("Ese dia no existe");
             }

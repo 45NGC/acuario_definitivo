@@ -1,6 +1,7 @@
 //Recoge informacion de las ventas
 package ventaEntradas;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Scanner;
 import clasesPrincipales.Teclado;
 
 public class VentaEntrada {
-    static void Entrada() {
+    static void Entrada() throws IOException {
         int opcion;
         int tamaño=0;
         int edad=0;
@@ -26,12 +27,8 @@ public class VentaEntrada {
         System.out.println("1= Visita normal \n2= Visita guiada \n3= Visita a espectaculo");
         
         do{
-            try{
-                tipo = ent.nextInt(); // Asegurar entrada int entre 1 y 3
-            }catch(InputMismatchException ime){
-                ent.next();
-                tipo=4;
-            }
+            tipo = Teclado.leerInt();
+            if(tipo<1 || tipo>3){System.out.println("Tipo invalido");}
         }while(tipo<1 || tipo>3);
         
         
@@ -43,12 +40,7 @@ public class VentaEntrada {
                 System.out.println("¿Edad?");
                 
                 do{  //Asegura que la entrada sea mayor que 0 y nª
-                    try{
-                        edad = ent.nextInt();
-                    }catch(InputMismatchException ime){
-                        edad=Integer.MIN_VALUE;
-                        ent.next();
-                    }
+                    edad=Teclado.leerInt();
 
                     if(edad<0){
                         System.out.println("Valor invalido");
@@ -60,16 +52,12 @@ public class VentaEntrada {
 
                 System.out.println("¿Hay otra persona en el mismo grupo? 1=si, otro=no");
                 
-                try{ //Si opcion = 1 continua, cualquier otra cosa lo rompe
-                    opcion=ent.nextInt();
+                //Si opcion = 1 continua, cualquier otra cosa lo rompe
+                    opcion=Teclado.leerInt();
                     if(opcion==1){
                         bucle=true;
                     }else{bucle=false;}
-                    
-                }catch(InputMismatchException ime){
-                    ent.next();
-                    bucle=false;
-                }
+
 
             }while(bucle==true);
 
