@@ -10,13 +10,13 @@ public class ArchivoLec {
     
     static final String ruta ="data\\ventas\\";
     //Atributos
-    private String tamaño;
+    private String tamano;
     private String tipo;
     private String pago;
     private String fecha;
     
-    public void setTamaño(String tamaño){
-        this.tamaño = tamaño;
+    public void setTamano(String tamano){
+        this.tamano = tamano;
     }
     
     public void setTipo(String tipo){
@@ -38,7 +38,7 @@ public class ArchivoLec {
             in.newLine();
             in.write(this.pago);
             in.newLine();
-            in.write(this.tamaño);
+            in.write(this.tamano);
             in.newLine();
             in.write(this.tipo);
             in.newLine();

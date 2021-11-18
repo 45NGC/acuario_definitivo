@@ -19,6 +19,7 @@ public class ArchivosRead {
     static void read(boolean op,boolean benef, String strFecha) {
         //op - Si dia especifico o total.
         //benef - Si enseña los beneficios o no.
+
         
         String fecha;
         String precio;
@@ -66,21 +67,21 @@ public class ArchivosRead {
     
     
     static void fechaEsp(boolean benef) throws IOException { //Pregunta una fecha y se la manda a read
-        
-        Scanner ent = new Scanner(System.in);
-        int dia=0; int mes=0; int año=0;
+
+        Teclado teclado = new Teclado();
+        int dia=0; int mes=0; int ano=0;
         
         System.out.println("Año:");
         
         do{ //Si algo no es un nº o < 0 lo vuelve a preguntar
-            año = Teclado.leerInt();
-            if(año<0){System.out.println("Año invalido");}
-        }while(año < 0);
+            ano = teclado.leerInt();
+            if(ano<0){System.out.println("Año invalido");}
+        }while(ano < 0);
         
         System.out.println("Mes:");
         
         do{ //Comprueba que el nº sea posible
-            mes= Teclado.leerInt();
+            mes= teclado.leerInt();
             if(mes<1 || mes>12){
                 System.out.println("Ese mes no existe");
             }
@@ -89,13 +90,13 @@ public class ArchivosRead {
         
         System.out.println("Dia:");
         do{ //Comprueba que el nº sea posible
-            dia = Teclado.leerInt();
+            dia = teclado.leerInt();
             if(dia<1 || dia>31){
                 System.out.println("Ese dia no existe");
             }
         }while(dia<1 || dia>31);
         
-        String strFecha = "" + año + "-" + mes + "-" + dia;
+        String strFecha = "" + ano + "-" + mes + "-" + dia;
         
         read(false,benef,strFecha);
     }

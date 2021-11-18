@@ -10,7 +10,8 @@ public class Menu {
     public static void Venta() throws IOException {
         int opcion=0;
         boolean otra =true;
-        Scanner ent = new Scanner(System.in);
+        Teclado teclado = new Teclado();
+
 
 
         do{
@@ -18,7 +19,7 @@ public class Menu {
             System.out.println("1= Comprar entradas \n2= Historial de ventas \n3= Beneficios \nOtro= Salir");
             
 
-            opcion = Teclado.leerInt();
+            opcion = teclado.leerInt();
 
                 
             switch(opcion){ //Las opciones del menu
@@ -29,7 +30,7 @@ public class Menu {
                     System.out.println("1= Ventas de hoy, 2= Ventas de dia especifico, 3= Ventas totales");
                     
                     do{ //Asegura que la opcion exista.
-                        opcion=Teclado.leerInt();
+                        opcion=teclado.leerInt();
                         if(opcion<1 || opcion >3){
                             System.out.println("Esa no es una opcion");
                         }
@@ -53,7 +54,7 @@ public class Menu {
                 case 3: //Beneficios
                     System.out.println("1= Beneficios de hoy, 2= Beneficios de dia especifico, 3= Beneficios totales");
                     do{//Asegura que la opcion exista.
-                        opcion= Teclado.leerInt();
+                        opcion= teclado.leerInt();
 
                         if(opcion<1 || opcion >3){
                             System.out.println("Esa no es una opcion");

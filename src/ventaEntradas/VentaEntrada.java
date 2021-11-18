@@ -12,7 +12,7 @@ import clasesPrincipales.Teclado;
 public class VentaEntrada {
     static void Entrada() throws IOException {
         int opcion;
-        int tamaño=0;
+        int tamano=0;
         int edad=0;
         double precio;
         double precioTot=0;
@@ -20,14 +20,14 @@ public class VentaEntrada {
         boolean bucle=false;
         int otro=0;
 
-        Teclado entrada = new Teclado();
+        Teclado teclado = new Teclado();
         Scanner ent = new Scanner(System.in);
         
         System.out.println("¿Tipo de entrada?"); //Aun que vengan en grupo el tipo de la entrada es el mismo
         System.out.println("1= Visita normal \n2= Visita guiada \n3= Visita a espectaculo");
         
         do{
-            tipo = Teclado.leerInt();
+            tipo = teclado.leerInt();
             if(tipo<1 || tipo>3){System.out.println("Tipo invalido");}
         }while(tipo<1 || tipo>3);
         
@@ -35,12 +35,12 @@ public class VentaEntrada {
         do{ // Bucles de grupos
             do{ //Bucles de usuario por entrada grupal
 
-                tamaño += 1;
+                tamano += 1;
 
                 System.out.println("¿Edad?");
                 
                 do{  //Asegura que la entrada sea mayor que 0 y nª
-                    edad=Teclado.leerInt();
+                    edad=teclado.leerInt();
 
                     if(edad<0){
                         System.out.println("Valor invalido");
@@ -53,7 +53,7 @@ public class VentaEntrada {
                 System.out.println("¿Hay otra persona en el mismo grupo? 1=si, otro=no");
                 
                 //Si opcion = 1 continua, cualquier otra cosa lo rompe
-                    opcion=Teclado.leerInt();
+                    opcion=teclado.leerInt();
                     if(opcion==1){
                         bucle=true;
                     }else{bucle=false;}
@@ -61,8 +61,8 @@ public class VentaEntrada {
 
             }while(bucle==true);
 
-            if(tamaño>1){ //Si es un grupo le hace un descuento
-            precioTot=Calculos.multi(tamaño,precioTot);
+            if(tamano>1){ //Si es un grupo le hace un descuento
+            precioTot=Calculos.multi(tamano,precioTot);
             }
 
             //Cogiendo la fecha actual
@@ -76,7 +76,7 @@ public class VentaEntrada {
             //Mandar datos al escritor
             cliente.setFecha(strFecha);
             cliente.setPago(String.valueOf(precioTot));
-            cliente.setTamaño(String.valueOf(tamaño));
+            cliente.setTamano(String.valueOf(tamano));
             cliente.setTipo(String.valueOf(tipo));
 
             //Escribir
@@ -84,7 +84,7 @@ public class VentaEntrada {
             
             System.out.println("¿Quieres comprar otra entrada?\n1=Si otro=No");  //Otra entrada
             try{ //Si algo que no sea nº se rompe
-                otro=ent.nextInt();
+                otro=teclado.leerInt();
             }catch(InputMismatchException ime){
                 ent.next();
                 otro=2;

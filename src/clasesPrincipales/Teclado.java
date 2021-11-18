@@ -11,7 +11,7 @@ public class Teclado {
         return (br.readLine());
     }
 
-    public static int leerInt() throws IOException{
+    public int leerInt() throws IOException{
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         int entero;
         String datosIntroducidos=br.readLine();
@@ -34,18 +34,4 @@ public class Teclado {
         }
         return (decimal);
     }
-
-    char leerChar() throws IOException{
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        char caracter;
-        String datosIntroducidos=br.readLine();
-        caracter=datosIntroducidos.charAt(0);
-        return caracter;
-    }
-
-    void leerIntro() throws IOException{
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-        br.readLine();
-    }
-
 }
