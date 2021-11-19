@@ -15,6 +15,7 @@ import mundoMarino.Producto;
 import mundoMarino.productos.Comida;
 import mundoMarino.productos.Peluche;
 import ventaEntradas.Menu;
+import ventaEntradas.Taquilla;
 
 public class Main {
 
@@ -270,7 +271,8 @@ public class Main {
     /* FINAL CLIENTES */
 
     static void ventaDeEntradas() throws IOException {
-        Menu.Venta();
+        Taquilla taquilla = new Taquilla();
+        taquilla.Menu();
     }
 
     static void eventos() throws IOException{
