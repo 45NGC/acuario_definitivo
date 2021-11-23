@@ -2,15 +2,15 @@ package mundoMarino;
 
 /* Author: Javier Miralles Rancaño */
 
-public class GestionTienda {
+public class Tienda {
 
     /* Attributes */
     private Producto productos[] = null;
     private double caja;
 
     /* Constructor */
-    public GestionTienda(){}
-    public GestionTienda(Producto[] productos){
+    public Tienda(){}
+    public Tienda(Producto[] productos){
         this.productos=productos;
     }
 

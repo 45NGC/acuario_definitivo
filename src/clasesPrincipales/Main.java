@@ -5,16 +5,14 @@ import mundoMarino.*;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import mundoMarino.Empleado;
-import mundoMarino.GestionTienda;
+import mundoMarino.Tienda;
 import mundoMarino.Producto;
 import mundoMarino.productos.Comida;
 import mundoMarino.productos.Peluche;
-import ventaEntradas.Menu;
 import ventaEntradas.Taquilla;
 
 public class Main {
@@ -343,7 +341,7 @@ public class Main {
         //Creamos el array "catálogo" para contener los productos. Su dimensión viene del número de veces que se instancia el constructor Producto.
         Producto[] catalogo = new Producto[Producto.dimensionArray];
         //Se crea el objeto gestión para trabajar (mostrar, vender productos, y mostrar caja)
-        GestionTienda gestion = new GestionTienda();
+        Tienda gestion = new Tienda();
 
         catalogo[0] = peluche1;
         catalogo[1] = peluche2;
