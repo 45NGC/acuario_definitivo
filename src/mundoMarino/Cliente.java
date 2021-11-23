@@ -99,7 +99,7 @@ public class Cliente {
 
 
 
-/*
+
     public int tamano(){
 
         return(4+2+30+2+50+2+9+2+40+2+30+4+2+5+2+5+4);
@@ -128,7 +128,7 @@ public class Cliente {
         }
         return (finArchivo);
     }
- */
+
     public void mostrarDatosEntrada(){
         System.out.println("El visitante numero "+numVisitante+" llamado "+nombre.trim()+" "+apellidos.trim()+" entró al acuario a las "+horaEntrada.trim()+" horas.");
     }
