@@ -8,13 +8,13 @@ public class Cliente {
 
     private String nombre,apellidos,dni,correoElectronico,nombreResponsable,horaEntrada,horaSalida;
     private int edad,valoracion,numVisitante;
-    final int LONGNOMBRE = 30;
-    final int LONGAPELLIDOS = 50;
-    final int LONGDNI = 9;
-    final int LONGCORREO=40;
-    final int LONGNOMBRERESPONSABLE=30;
-    final int LONGHORAENTRADA=5;
-    final int LONGHORASALIDA=5;
+    //final int LONGNOMBRE = 30;
+    //final int LONGAPELLIDOS = 50;
+    //final int LONGDNI = 9;
+    //final int LONGCORREO=40;
+    //final int LONGNOMBRERESPONSABLE=30;
+    //final int LONGHORAENTRADA=5;
+    //final int LONGHORASALIDA=5;
 
 
 
@@ -99,7 +99,7 @@ public class Cliente {
 
 
 
-
+/*
     public int tamano(){
 
         return(4+2+30+2+50+2+9+2+40+2+30+4+2+5+2+5+4);
@@ -128,6 +128,7 @@ public class Cliente {
         }
         return (finArchivo);
     }
+ */
     public void mostrarDatosEntrada(){
         System.out.println("El visitante numero "+numVisitante+" llamado "+nombre.trim()+" "+apellidos.trim()+" entró al acuario a las "+horaEntrada.trim()+" horas.");
     }
